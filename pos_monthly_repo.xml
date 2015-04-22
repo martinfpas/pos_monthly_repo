@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    	<record id="view_report_pos_order_search2" model="ir.ui.view">
+            <field name="name">pos.monthly.repo.search2</field>
+            <field name="model">report.pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_report_pos_order_search"/>
+            <field name="arch" type="xml">
+				<filter name="User" position="after" >
+                	<filter string="Product Category" icon="terp-accessories-archiver" context="{'group_by':'categ_id'}"/>
+					<filter string="Shop" icon="terp-accessories-archiver" context="{'group_by':'shop_id'}"/>
+                </filter>             			
+            </field>
+        </record> 
+        
+        <record id="view_pos_monthly_repo_tree2" model="ir.ui.view">
+            <field name="name">pos.monthly.repo.tree2</field>
+            <field name="model">report.pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_report_pos_order_tree"/>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<field name="average_price" position="after">
+					<field name="categ_id" invisible="1"/>
+					<field name="shop_id" invisible="1"/>
+				</field>
+				<field name="total_discount" position="after">
+					<field name="cost_total" sum="Costo Total"/>
+					<field name="profit_total" sum="Margen Total"/>
+				</field>
+				<field name="average_price" position="before">
+					<field name="cost" />
+					<field name="profit" />
+				</field>
+            </field>
+        </record>
+                
+    </data>
+</openerp>
